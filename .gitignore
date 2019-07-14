@@ -43,4 +43,4 @@ __pycache__
 !doc/**/figures/*.pdf
 
 # end of file
-models/cdm/examples/
+models/cdm/examples/*
