@@ -12,10 +12,18 @@ __pycache__
 # the synthetic data from the mogi model
 /models/mogi/examples/**/*.txt
 /models/mogi/examples/**/*.csv
+/models/mogi/examples/**/*.pdf
+/models/mogi/examples/**/*.pfg
+/models/mogi/examples/**/*.asc
+/models/mogi/examples/*.ipynb
 
 # the synthetic data from the cdm model
 /models/cdm/examples/**/*.txt
 /models/cdm/examples/**/*.csv
+/models/cdm/examples/**/*.pdf
+/models/cdm/examples/**/*.pfg
+/models/cdm/examples/**/*.asc
+/models/cdm/examples/*.ipynb
 
 # auctex lint
 /doc/**/auto
