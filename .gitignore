@@ -10,20 +10,11 @@ __pycache__
 /products
 
 # the synthetic data from the mogi model
-/models/mogi/examples/**/*.txt
-/models/mogi/examples/**/*.csv
-/models/mogi/examples/**/*.pdf
-/models/mogi/examples/**/*.pfg
-/models/mogi/examples/**/*.asc
-/models/mogi/examples/*.ipynb
+/models/mogi/examples/
+/models/mogi/examples_old/
 
 # the synthetic data from the cdm model
-/models/cdm/examples/**/*.txt
-/models/cdm/examples/**/*.csv
-/models/cdm/examples/**/*.pdf
-/models/cdm/examples/**/*.pfg
-/models/cdm/examples/**/*.asc
-/models/cdm/examples/*.ipynb
+/models/cdm/examples/
 
 # auctex lint
 /doc/**/auto
@@ -43,7 +34,3 @@ __pycache__
 !doc/**/figures/*.pdf
 
 # end of file
-models/cdm/examples/*
-models/cdm/examples/10def models/cdm/examples/calbuco models/cdm/examples/domuyo models/cdm/examples/grace models/cdm/examples/parameters.csv models/cdm/examples/pdfs models/cdm/examples/results models/cdm/examples/synthetic
-models/mogi/examples/**
-models/mogi/examples/*
