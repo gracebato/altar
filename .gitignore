@@ -45,3 +45,5 @@ __pycache__
 # end of file
 models/cdm/examples/*
 models/cdm/examples/10def models/cdm/examples/calbuco models/cdm/examples/domuyo models/cdm/examples/grace models/cdm/examples/parameters.csv models/cdm/examples/pdfs models/cdm/examples/results models/cdm/examples/synthetic
+models/mogi/examples/**
+models/mogi/examples/*
