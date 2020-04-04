@@ -32,7 +32,7 @@ class Reverso(altar.models.bayesian, family="altar.models.reverso"):
     # the computational strategy to use
     mode = altar.properties.str(default="fast")
     mode.doc = "the implementation strategy"
-    mode.validators = altar.constraints.isMember("analytic", "fast")
+    mode.validators = altar.constraints.isMember("native", "fast")
 
     # the norm to use for computing the data log likelihood
     norm = altar.norms.norm()
@@ -52,10 +52,13 @@ class Reverso(altar.models.bayesian, family="altar.models.reverso"):
     v.doc = "Poisson's ratio"
 
     mu = altar.properties.float(default=2000.0)
-    mu.doc = "viscosity [Pa-s]"
+    mu.doc = "magma viscosity [Pa-s]"
 
-    drho = altar.properties.float(default=300.0)
-    drho.doc = "density difference (ρ_r-ρ_m), [kg/m**3]"
+    a_s = altar.properties.float(default=2000.0)
+    a_s.doc = "radius of the shallow reservoir"
+
+    H_s = altar.properties.float(default=3000.0)
+    H_s.doc = "depth of the shallow reservoir"
 
     # physical parameters
     G = altar.properties.float(default=20.0E9)
@@ -222,12 +225,11 @@ class Reverso(altar.models.bayesian, family="altar.models.reverso"):
 
         # record the layout of the sample vector
         # transfer the offsets of the various slots to members
-        self.Qin_idx = psets["Qin"].offset
-        self.Hs_idx = psets["H_s"].offset
-        self.Hd_idx = psets["H_d"].offset
-        self.as_idx = psets["a_s"].offset
-        self.ad_idx = psets["a_d"].offset
-        self.ac_idx = psets["a_c"].offset
+        self.Qin_idx  = psets["Qin"].offset
+        self.drho_idx = psets["drho"].offset
+        self.Hd_idx   = psets["H_d"].offset
+        self.k_idx    = psets["k"].offset
+        self.ac_idx   = psets["a_c"].offset
 
         # all done
         return
@@ -393,12 +395,11 @@ class Reverso(altar.models.bayesian, family="altar.models.reverso"):
 
     # private data
     # the sample layout; patched during {initialize}
-    Qin_idx = 0
-    Hs_idx = 0
-    Hd_idx = 0
-    as_idx = 0
-    ad_idx = 0
-    ac_idx = 0
+    Qin_idx  = 0
+    drho_idx = 0
+    Hd_idx   = 0
+    k_idx    = 0
+    ac_idx   = 0
 
     # input
     ticks = None # the list of observation points

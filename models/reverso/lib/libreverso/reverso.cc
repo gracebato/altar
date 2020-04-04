@@ -36,9 +36,9 @@ namespace altar::models::reverso {
 void
 altar::models::reverso::
 reverso(int sample, const gsl_matrix * locations,
-        double H_s, double H_d, double a_s, double a_d, double a_c,
-        double Qin,
-        double G, double v, double mu, double drho, double g,
+        double drho, double H_d, double k,
+        double Qin, double a_c,
+        double G, double v, double mu, double H_s, double a_s, double g,
         gsl_matrix * predicted)
 {
     // initial conditions
@@ -47,8 +47,8 @@ reverso(int sample, const gsl_matrix * locations,
     // deep reservoir overpressure [Pa]
     auto dPd0 = 0.0;
 
-    // ratio of reservoir volumes
-    auto k = std::pow(a_d/a_s, 3);
+    // get radius of the deep reservoir
+    auto a_d = std::cbrt(k)*a_s;
     // length of the hydraulic connection
     auto H_c = H_d - H_s;
     auto gamma_s = 8.0 * (1-v) / (3.0 * pi);

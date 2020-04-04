@@ -15,20 +15,21 @@ import math
 
 # the calculator
 def REVERSO(locations,
-            H_s, H_d, a_s, a_d, a_c,
-            Qin,
-            G, v, mu, drho, g):
+            drho, H_d, k,
+            Qin, a_c,
+            G, v, mu, H_s, a_s, g):
     """
     Calculate the surface displacements for a Reverso model at observation {locations}
 
     The parameter {locations} is an array of (t, x, y) triplets
 
     model parameters:
-        a_c: the radius of the hydraulic pipe
-        a_s: the radius of the shallow reservoir
-        a_d: the radius of the deep reservoir
-        H_s: the depth of the shallow reservoir
-        H_d: the depth of the deep reservoir
+        a_c : the radius of the hydraulic pipe
+        a_s : the radius of the shallow reservoir
+        k   : the ratio of the reservoir radii, ad**3/as**3
+        drho: the magma density difference, (ρ_r-ρ_m)
+        H_d : the depth of the deep reservoir
+        Qin : the magma inflow rate 
     """
 
     # constants
@@ -42,8 +43,8 @@ def REVERSO(locations,
     # deep reservoir overpressure [Pa]
     dPd0 = 0.0
 
-    # ratio of reservoir volumes
-    k = (a_d/a_s)**3
+    # radius of the deep reservoir
+    a_d = a_s * k**(1.0/3.0)
     # length of the hydraulic connection
     H_c = H_d - H_s
     gamma_s = 8.0 * (1-v) / (3.0 * pi)

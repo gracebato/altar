@@ -57,10 +57,9 @@ class Native:
 
         # get the offsets of the various parameter sets
         QinIdx = model.Qin_idx
-        HsIdx = model.Hs_idx
+        drhoIdx = model.drho_idx
         HdIdx = model.Hd_idx
-        asIdx = model.as_idx
-        adIdx = model.ad_idx
+        kIdx = model.k_idx
         acIdx = model.ac_idx
 
         # get the locations and times of the observations
@@ -74,19 +73,19 @@ class Native:
             parameters = θ.getRow(sample)
             # get the flow rate
             Qin = parameters[QinIdx]
-            # get the locations of the chambers
-            H_s = parameters[HsIdx]
+            # get the magma density difference, (rhor-rhom)
+            drho = parameters[drhoIdx]
+            # get the depth of the deep chamber
             H_d = parameters[HdIdx]
-            # get the sizes
-            a_s = parameters[asIdx]
-            a_d = parameters[adIdx]
+            # get the ratio of the reservoir radii, ad**3/as**3
+            k = parameters[kIdx]
+            # get the conduit radius
             a_c = parameters[acIdx]
 
             # make a source using the sample parameters
-            reverso = source(H_s=H_s, H_d=H_d,
-                             a_s=a_s, a_d=a_d, a_c=a_c,
-                             Qin=Qin,
-                             G=model.G, v=model.v, mu=model.mu, drho=model.drho, g=model.g)
+            reverso = source(H_d=H_d, k=k, drho=drho,
+                             Qin=Qin, a_c=a_c,
+                             G=model.G, v=model.v, mu=model.mu, H_s=model.H_s, a_s=model.a_s, g=model.g)
 
             # prime the displacement calculator
             predicted = reverso.displacements(locations=ticks)
@@ -96,8 +95,8 @@ class Native:
                 # find the polar angle of the vector to the observation location
                 phi = math.atan2(y,x)
                 # compute the E and N components
-                u_E = u_R * math.sin(phi)
-                u_N = u_R * math.cos(phi)
+                u_E = u_R * math.cos(phi)
+                u_N = u_R * math.sin(phi)
                 # save
                 u[3*idx + 0] = u_E
                 u[3*idx + 1] = u_N

@@ -66,21 +66,22 @@ displacements(gsl_matrix_view * samples, gsl_matrix * predicted) const {
         // unpack the parameters
         // the flow rate
         auto Qin = gsl_matrix_get(&samples->matrix, sample, _QinIdx);
-        // the chamber locations
-        auto H_s = gsl_matrix_get(&samples->matrix, sample, _HsIdx);
+        // the depth of the deep reservoir
         auto H_d = gsl_matrix_get(&samples->matrix, sample, _HdIdx);
-        // the chamber sizes
-        auto a_s = gsl_matrix_get(&samples->matrix, sample, _asIdx);
-        auto a_d = gsl_matrix_get(&samples->matrix, sample, _adIdx);
+        // the ratio of the radii
+        auto k = gsl_matrix_get(&samples->matrix, sample, _kIdx);
         // the hydraulic pipe radius
         auto a_c = gsl_matrix_get(&samples->matrix, sample, _acIdx);
+        // the magma density difference
+        auto drho = gsl_matrix_get(&samples->matrix, sample, _drhoIdx);
 
         // compute the displacements
         reverso(sample, _locations,
-                H_s, H_d, a_s, a_d, a_c,
-                Qin,
-                _G, _v, _mu, _drho, _g,
-                predicted);        
+                drho, H_d, k,
+                Qin, a_c,
+                _G, _v, _mu, _Hs, _as, _g,
+                predicted);     
+  
     }
 
     // all done

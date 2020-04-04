@@ -14,7 +14,7 @@
 // meta-methods
 // constructor
 altar::models::reverso::Source::
-Source(double G, double v, double mu, double drho, double g):
+Source(double G, double v, double mu, double H_s, double a_s, double g):
     // gsl entities
     _data(0),
     _locations(0),
@@ -22,14 +22,14 @@ Source(double G, double v, double mu, double drho, double g):
     _G(G),
     _v(v),
     _mu(mu),
-    _drho(drho),
+    _Hs(H_s),
+    _as(a_s),
     _g(g),
     // sample vector layout
     _QinIdx(0),
-    _HsIdx(0),
+    _drhoIdx(0),
     _HdIdx(0),
-    _asIdx(0),
-    _adIdx(0),
+    _kIdx(0),
     _acIdx(0)
 {}
 
@@ -74,14 +74,13 @@ locations(gsl_matrix * locations) {
 void
 altar::models::reverso::Source::
 layout(size_type QinIdx,
-       size_type HsIdx, size_type HdIdx,
-       size_type asIdx, size_type adIdx, size_type acIdx) {
+       size_type drhoIdx, size_type HdIdx,
+       size_type kIdx, size_type acIdx) {
     // assign
     _QinIdx = QinIdx;
-    _HsIdx = HsIdx;
+    _drhoIdx = drhoIdx;
     _HdIdx = HdIdx;
-    _asIdx = asIdx;
-    _adIdx = adIdx;
+    _kIdx = kIdx;
     _acIdx = acIdx;
 
     // make a channel

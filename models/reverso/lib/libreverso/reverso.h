@@ -11,9 +11,9 @@
 
 namespace altar::models::reverso {
     void reverso(int sample, const gsl_matrix * locations,
-                 double H_s, double H_d, double a_s, double a_d, double a_c,
-                 double _Qin,
-                 double G, double v, double mu, double drho, double g,
+                 double drho, double H_d, double k,
+                 double Qin, double a_c,
+                 double G, double v, double mu, double H_s, double a_s, double g,
                  gsl_matrix * predicted);
 }
 

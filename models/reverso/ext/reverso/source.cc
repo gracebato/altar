@@ -49,12 +49,13 @@ newSource(PyObject *, PyObject * args)
     double G;
     double v;
     double mu;
-    double drho;
+    double H_s;
+    double a_s;
     double g;
     // extract the material parameters
     int status = PyArg_ParseTuple(args,
-                                  "ddddd:newSource",
-                                  &G, &v, &mu, &drho, &g);
+                                  "dddddd:newSource",
+                                  &G, &v, &mu, &H_s, &a_s, &g);
     // if something went wrong
     if (!status) {
         // complain
@@ -62,7 +63,7 @@ newSource(PyObject *, PyObject * args)
     }
 
     // make a new source
-    source_t * source = new source_t(G, v, mu, drho, g);
+    source_t * source = new source_t(G, v, mu, H_s, a_s, g);
     // wrap it in a capsule and return it
     return PyCapsule_New(source, source_capst, freeSource);
 }
@@ -228,13 +229,13 @@ layout(PyObject *, PyObject * args)
 {
     // storage
     PyObject * pySource;
-    std::size_t QinIdx, HsIdx, HdIdx, asIdx, adIdx, acIdx;
+    std::size_t QinIdx, drhoIdx, HdIdx, kIdx, acIdx;
 
     // unpack the arguments
     int status = PyArg_ParseTuple(args,
-                                  "O!kkkkkk:layout",
+                                  "O!kkkkk:layout",
                                   &PyCapsule_Type, &pySource,
-                                  &QinIdx, &HsIdx, &HdIdx, &asIdx, &adIdx, &acIdx);
+                                  &QinIdx, &drhoIdx, &HdIdx, &kIdx, &acIdx);
     // if something went wrong
     if (!status) {
         // complain
@@ -261,7 +262,7 @@ layout(PyObject *, PyObject * args)
         << pyre::journal::endl;
 
     // attach the map
-    source->layout(QinIdx, HsIdx, HdIdx, asIdx, adIdx, acIdx);
+    source->layout(QinIdx, drhoIdx, HdIdx, kIdx, acIdx);
 
     // all done
     Py_INCREF(Py_None);

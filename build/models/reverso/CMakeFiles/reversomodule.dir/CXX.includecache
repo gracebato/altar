@@ -8,30 +8,6 @@
 
 /Users/bato/tools/altar/models/reverso/ext/reverso/capsules.h
 
-/Users/bato/tools/altar/models/reverso/ext/reverso/exceptions.cc
-portinfo
--
-Python.h
--
-string
--
-exceptions.h
-/Users/bato/tools/altar/models/reverso/ext/reverso/exceptions.h
-
-/Users/bato/tools/altar/models/reverso/ext/reverso/exceptions.h
-
-/Users/bato/tools/altar/models/reverso/ext/reverso/reverso.cc
-portinfo
--
-string
--
-Python.h
--
-exceptions.h
-/Users/bato/tools/altar/models/reverso/ext/reverso/exceptions.h
-source.h
-/Users/bato/tools/altar/models/reverso/ext/reverso/source.h
-
 /Users/bato/tools/altar/models/reverso/ext/reverso/source.cc
 portinfo
 -

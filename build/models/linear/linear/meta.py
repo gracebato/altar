@@ -9,11 +9,11 @@
 #
 
 # expansion placeholders
-date = "2020-03-26T22:05:29Z"
+date = "2020-04-04T21:10:47Z"
 major = 2
 minor = 0
 micro = 1
-revision = "84fe1a8"
+revision = "168be39"
 
 
 # assemble the version tuple
